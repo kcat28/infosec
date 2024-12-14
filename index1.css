@@ -1,0 +1,332 @@
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background-color: #EAEEE5;
+}
+
+.sidepanel {
+    background-color: #CADEC8;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.circle-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px; 
+    margin-top: 30px;
+}
+
+#profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px; 
+}
+
+button {
+    font-family: inherit;
+    font-weight: bold;
+}
+
+#profile h2, #profile p {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 1%;
+}
+
+.sidebuttons {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 1.2em;
+    margin-top: 40px; 
+   
+}
+
+#login-btn, #signup-btn{
+    background-color: white; 
+    color: black; 
+    border-radius: 20px;
+    width: 300%;
+    padding: 8px; 
+    font-size: 1em; 
+    cursor: pointer; 
+    box-sizing: border-box; 
+    transition: transform 0.2s ease, box-shadow 0.5s ease;
+}
+
+
+#login-btn:hover, #signup-btn:hover {
+    background-color: #5C8F6D;
+    transform: scale(1.04); 
+}
+
+/* popup form styling */
+.popup-form, .popup-form1{
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.form-container, .form-container1 {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    text-align: center;
+    
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px -7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #5C8F6D;
+}
+
+button[type="submit"]{
+    width: 100%;
+    background-color: #494b49;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="button"]{
+    margin-top: 2%;
+    width: 100%;
+    background-color: #494b49;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover, button[type="button"]:hover{
+    background-color: #5C8F6D;
+    border-radius: 10px;
+}
+
+/* logout buttons >>>>> */
+
+
+.logout {
+    margin-top: auto;
+    background-color: #CADEC8;
+    color: black;
+    border: none;
+    padding: 10px;
+    width: 90%;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout:hover {
+    background-color: #5C8F6D;
+}
+
+/* top panel section >>>>> */
+
+.toppanel {
+    position: fixed;
+    left: 15%; /* This starts the top panel from the right of the side panel */
+    right: 0; /* Fills the rest of the width */ 
+    padding: 0.5em;
+    z-index: 10;
+}
+
+#sheet-title{
+    margin-left: 0.5%;
+}
+#sheet-title input {
+    font-family: inherit;
+    margin-top: 0%;
+    margin-bottom: 1.5%;
+    padding: 10px; 
+    border: 3px solid #000; 
+    border-radius: 15px; 
+    background-color: #CADEC8; 
+    font-weight: 800;  
+    font-size: 30px; 
+    white-space: nowrap; 
+    width: auto;
+}
+
+#topbuttons {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center; 
+    padding: 10px; 
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+}
+
+.button-container button {
+    background-color: transparent; 
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.5s ease;
+}
+
+.button-container button:hover {
+    border-radius: 10px;
+    transform: scale(1.1); 
+}
+
+.button-container h2 {
+    margin-top: 8px;
+    font-size: 1em;
+    color: #000; 
+}
+
+#topbuttons img {
+    width: 55px; 
+    height: 55px;
+    object-fit: contain;
+    display: block;
+}
+
+
+
+/*tables*/
+.table-container {
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 14%; /* Create space for the top panel */
+    overflow-x: auto; /* Allows horizontal scrolling if the table is too wide */
+}
+
+@media (max-width: 1620px), (max-width: 1280px), (max-width: 1510px) {
+    .table-container {
+        width: 85%;
+        margin: 0 auto;
+        margin-top: 18%; 
+        overflow-x: auto; 
+    }
+
+    .sidebutton{
+        font-size: 0.7em;
+    }
+
+    #profile{
+        font-size: 0.8em;
+    
+    }
+
+    #login-btn, #signup-btn{
+        background-color: white; /* Button background color */
+        color: black; /* Text color */
+        border-radius: 20px;
+        width: 270%;
+        padding: 8px; /* Reduced padding for better fit */
+        font-size: 0.8em; /* Adjust font size for readability */
+        cursor: pointer; /* Change the cursor to indicate a clickable element */
+        box-sizing: border-box; /* Ensures padding and borders are included in width calculation */
+        transition: transform 0.2s ease, box-shadow 0.5s ease;
+    }
+}
+
+
+#editable-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    /* table-layout:fixed; */
+}
+
+#subject-name, #term, #section, #ay {
+    width: 30%;
+}
+
+#editable-table th,
+#editable-table td {
+    border: 2px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+#editable-table th, #subject-name, #term, #section, #ay {
+    background-color: #CADEC8;
+    color: black;
+    font-weight: bold;
+}
+
+/* Alternating Row Colors */
+#editable-table tr:nth-child(odd) {
+    background-color: #7ABD87;  /* Color for odd rows */
+}
+
+#editable-table tr:nth-child(even) {
+    background-color: #CADEC8;  /* Color for even rows */
+}
+
+[contenteditable="true"] {
+    background-color: #f9f9f9;
+    outline: none;
+}
+
+[contenteditable="true"]:focus {
+    border: 1px solid #007bff;
+    background-color: white;
+}
+
+input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.table-container button {
+    padding: 10px 15px;
+    background-color: #7ABD87;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+button:hover {
+    background-color: #5C8F6D;
+}
+
+
