@@ -1,5 +1,4 @@
-<?php include 'conn.php';
-?>
+<?php include 'conn.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +29,10 @@
     </div>
 
 
-<div id="popupForm1" class="popup-form">
+    <div id="popupForm1" class="popup-form">
     <div class="form-container">
         <h2>Sign Up</h2>
+
         <form id="signupForm" method="POST">
             <label for="fname-signup">First Name:</label>
             <input type="text" id="fname-signup" name="fname-signup" required/>
@@ -44,7 +44,7 @@
             <input type="text" id="username-signup" name="username-signup" required/>
 
             <label for="email-signup">Email:</label>
-            <input type="text" id="email-signup" name="email-signup" required/>
+            <input type="email" id="email-signup" name="email-signup" required/>
 
             <label for="password-signup">Password:</label>
             <input type="password" id="password-signup" name="password-signup" required/>
@@ -55,13 +55,11 @@
     </div>
 </div>
 
-
-
     <section class="sidepanel">
         <div id="profile">
-            <img src="imgs/rooster.jpg" alt="rooster" class="circle-image">
-            <h2>Fred Rooster</h2>
-            <p>friedfredchicken@gmail.com</p>
+            <img src="imgs/rooster.jpg" alt="rooster" class="circle-image" id="profile-img">
+            <h2 id="profile-name">Fred Rooster</h2>
+            <p id="profile-email">friedfredchicken@gmail.com</p>
         </div>
         
         <div class="sidebuttons">
@@ -69,6 +67,7 @@
             <button id="signup-btn"> Sign up</button>
         </div>
     </section>
+
     
     <section class="toppanel">
             <div id="sheet-title">
