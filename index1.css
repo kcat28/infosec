@@ -270,7 +270,7 @@ button[type="submit"]:hover, button[type="button"]:hover{
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    /* table-layout:fixed; */
+    table-layout:fixed;
 }
 
 #subject-name, #term, #section, #ay {
@@ -328,5 +328,11 @@ input {
 button:hover {
     background-color: #5C8F6D;
 }
+
+th{
+    text-align: center;
+}
+
+
 
 
