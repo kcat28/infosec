@@ -1,5 +1,5 @@
 <?php
-//connection to db func
+// Connection to the database
 $host = 'localhost';
 $db = 'gradeit';
 $user = 'root';

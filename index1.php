@@ -1,4 +1,7 @@
-<?php include 'conn.php'; 
+<?php 
+
+include 'conn.php'; 
+include 'data_processing.php';
 
 $sql_students = "SELECT * FROM students";
 try {
@@ -66,6 +69,15 @@ try {
 }
 
 $i = 1; // Initialize the variable
+
+
+// Define an array of student numbers (can also come from a database query)
+if (!isset($pdo) || !$pdo instanceof PDO) {
+    die("Database connection is not properly configured.");
+}
+
+
+
 ?>
 
 
@@ -166,7 +178,7 @@ $i = 1; // Initialize the variable
 
     <!-- Table Form -->
     <div class="table-container">
-        <form method="POST" id="grades-form" action="data_processing.php">
+        <form method="POST" id="grades-form">
             <table id="editable-table">
                 <thead>
                     <?php foreach ($gradingsystem as $gs): ?>
@@ -233,9 +245,19 @@ $i = 1; // Initialize the variable
                 <tr>
                 <?php 
                 // Assuming $students and $scores arrays are indexed in such a way that you can access them together.
-                foreach ($students as $index => $student): 
-                    // Retrieve the corresponding score for this student
-                    $score = isset($scores[$index]) ? $scores[$index] : null; // Ensure that the score exists
+                $scoresByStudentNum = [];
+                foreach ($scores as $score) {
+                    $scoresByStudentNum[$score['student_id']] = $score;
+                }
+
+                ?>
+
+                <?php foreach ($students as $i => $student): ?>
+                    <?php
+                    // Look for the student's score based on student_num
+                    $studentScore = isset($scoresByStudentNum[$student['student_id']]) 
+                        ? $scoresByStudentNum[$student['student_id']] 
+                        : null; // Default to null if no score is found
                 ?>
                 <tr>
                     <td><input type="text" id="no" name="no" value="<?= $i++; ?>"></td>
@@ -243,19 +265,26 @@ $i = 1; // Initialize the variable
                     <td colspan="6"><input type="text" id="fullname" name="fullname" value="<?= htmlspecialchars($student['fullname']); ?>"></td>
                     <td colspan="2"><input type="text" id="course" name="course" value="<?= htmlspecialchars($student['course']); ?>"></td>
                     <!-- Scores -->
-                    <?php if ($score): ?>
-                        <td><input type="text" id="subcompscores1" name="subcompscores1" value="<?= $score['subcompscores1']; ?>"></td>
-                        <td><input type="text" id="subcompscores2" name="subcompscores2" value="<?= $score['subcompscores2']; ?>"></td>
-                        <td><input type="text" id="subcompscores3" name="subcompscores3" value="<?= $score['subcompscores3']; ?>"></td>
-                        <td><input type="text" id="subcompscores4" name="subcompscores4" value="<?= $score['subcompscores4']; ?>"></td>
-                        <td><input type="text" id="subcompscores5" name="subcompscores5" value="<?= $score['subcompscores5']; ?>"></td>
-                        <td><input type="text" id="subcompscores6" name="subcompscores6" value="<?= $score['subcompscores6']; ?>"></td>
-                        <td><input type="text" id="subcompscores7" name="subcompscores7" value="<?= $score['subcompscores7']; ?>"></td>
-                        <td><input type="text" id="subcompscores8" name="subcompscores8" value="<?= $score['subcompscores8']; ?>"></td>
-                        <td><input type="text" id="subcompscores9" name="subcompscores9" value="<?= $score['subcompscores9']; ?>"></td>
-                        <td><input type="text" id="subcompscores10" name="subcompscores10" value="<?= $score['subcompscores10']; ?>"></td>
-                        <td><input type="text" id="subcompscores11" name="subcompscores11" value="<?= $score['subcompscores11']; ?>"></td>
-                        <td><input type="text" id="grade" name="grades[]" value="<?= $score['grade']; ?>"></td>
+                    <?php if ($studentScore): ?>
+                        <td><input type="text" id="subcompscores1" name="subcompscores1" value="<?= $studentScore['subcompscores1']; ?>"></td>
+                        <td><input type="text" id="subcompscores2" name="subcompscores2" value="<?= $studentScore['subcompscores2']; ?>"></td>
+                        <td><input type="text" id="subcompscores3" name="subcompscores3" value="<?= $studentScore['subcompscores3']; ?>"></td>
+                        <td><input type="text" id="subcompscores4" name="subcompscores4" value="<?= $studentScore['subcompscores4']; ?>"></td>
+                        <td><input type="text" id="subcompscores5" name="subcompscores5" value="<?= $studentScore['subcompscores5']; ?>"></td>
+                        <td><input type="text" id="subcompscores6" name="subcompscores6" value="<?= $studentScore['subcompscores6']; ?>"></td>
+                        <td><input type="text" id="subcompscores7" name="subcompscores7" value="<?= $studentScore['subcompscores7']; ?>"></td>
+                        <td><input type="text" id="subcompscores8" name="subcompscores8" value="<?= $studentScore['subcompscores8']; ?>"></td>
+                        <td><input type="text" id="subcompscores9" name="subcompscores9" value="<?= $studentScore['subcompscores9']; ?>"></td>
+                        <td><input type="text" id="subcompscores10" name="subcompscores10" value="<?= $studentScore['subcompscores10']; ?>"></td>
+                        <td><input type="text" id="subcompscores11" name="subcompscores11" value="<?= $studentScore['subcompscores11']; ?>"></td>
+                        <td>
+                             <!-- Display grades directly in the column -->
+                            <?php if (isset($grades[$studentScore['student_id']])): ?>
+                                <?= htmlspecialchars($grades[$studentScore['student_id']]); ?>
+                            <?php else: ?>
+                                No grade available
+                            <?php endif; ?>
+                        </td>
                     <?php else: ?>
                         <!-- If no score exists, display blank fields -->
                         <td><input type="text" id="subcompscores1" name="subcompscores1" value=""></td>
@@ -269,7 +298,8 @@ $i = 1; // Initialize the variable
                         <td><input type="text" id="subcompscores9" name="subcompscores9" value=""></td>
                         <td><input type="text" id="subcompscores10" name="subcompscores10" value=""></td>
                         <td><input type="text" id="subcompscores11" name="subcompscores11" value=""></td>
-                        <td></td>
+                        <td>
+                        </td>
                     <?php endif; ?>
                 </tr>
                 <?php endforeach; ?>

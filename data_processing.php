@@ -1,76 +1,72 @@
 <?php
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ini_set('log_errors', 1);
 ini_set('error_log', 'php_errors.log');
 
-include 'conn.php';
+include 'conn.php'; // Include the database connection
 
-/**
- * Function to calculate grades based on subcomponent scores and weights
- *
- * @param array $student_nums Array of student numbers
- * @param object $db Database connection object
- * @param int $gradingsystem_id Grading system ID
- * @return array $grades Array of grades for each student
- */
-function calculateGrades($student_nums, $db, $gradingsystem_id) {
-    // Initialize an array to store grades for each student
-    $grades = [];
+// Function to fetch data from the database
+function fetchData($pdo, $sql, $params = []) {
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log('Query failed: ' . $e->getMessage());
+        return [];
+    }
+}
 
-    // Step 1: Get the weights for each component from the database (fetch only once)
+// Function to calculate grades based on subcomponent scores and weights
+function calculateGrades($pdo) {
+    $gradingsystem_id = 2;
+
+    // Fetch component weights
     $weights_query = "SELECT weight1, weight2, weight3, weight4 FROM components_weights WHERE gradingsystem_id = :gradingsystem_id";
-    $stmt = $db->prepare($weights_query);
-    $stmt->execute(['gradingsystem_id' => $gradingsystem_id]);
-    $component_weights = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch weights once for the grading system
+    $component_weights = fetchData($pdo, $weights_query, ['gradingsystem_id' => $gradingsystem_id]);
 
     if (!$component_weights) {
+        error_log('No component weights found for gradingsystem_id: ' . $gradingsystem_id);
         return ['error' => 'Grading system not found.'];
     }
 
-    // Step 2: Loop through each student to calculate their grade
-    foreach ($student_nums as $student_num) {
-        // Get the scores for the student from the database
-        $scores_query = "SELECT * FROM scores WHERE student_num = :student_num";
-        $stmt = $db->prepare($scores_query);
-        $stmt->execute(['student_num' => $student_num]);
-        $student_scores = $stmt->fetch(PDO::FETCH_ASSOC);
+    $component_weights = $component_weights[0]; // Since fetchData returns an array of rows
 
-        // Initialize total score for the student
+    // Fetch all student scores
+    $scores_query = "SELECT student_id, subcompscores1, subcompscores2, subcompscores3, subcompscores4, subcompscores5, subcompscores6, subcompscores7, subcompscores8, subcompscores9, subcompscores10, subcompscores11 FROM scores";
+    $scores = fetchData($pdo, $scores_query);
+
+    if (!$scores) {
+        error_log('No scores found.');
+    }
+
+    $grades = [];
+    foreach ($scores as $student_scores) {
         $total_score = 0;
 
-        // Ensure all required subcomponents are available
-        if ($student_scores) {
-            // Component 1: Subcomponent 1 & 2
-            $component1_score = (($student_scores['subcompscores1'] / 60) + ($student_scores['subcompscores2'] / 60)) / 2;
-            $total_score += $component_weights['weight1'] * $component1_score;
+        // Calculate component scores
+        $component1_score = (($student_scores['subcompscores1'] / 60) + ($student_scores['subcompscores2'] / 60)) / 2;
+        $total_score += $component_weights['weight1'] * $component1_score;
 
-            // Component 2: Subcomponent 3, 4 & 5
-            $component2_score = (($student_scores['subcompscores3'] / 60) + ($student_scores['subcompscores4'] / 60) + ($student_scores['subcompscores5'] / 60)) / 3;
-            $total_score += $component_weights['weight2'] * $component2_score;
+        $component2_score = (($student_scores['subcompscores3'] / 60) + ($student_scores['subcompscores4'] / 60) + ($student_scores['subcompscores5'] / 60)) / 3;
+        $total_score += $component_weights['weight2'] * $component2_score;
 
-            // Component 3: Subcomponent 6, 7 & 8
-            $component3_score = (($student_scores['subcompscores6'] / 60) + ($student_scores['subcompscores7'] / 60) + ($student_scores['subcompscores8'] / 60)) / 3;
-            $total_score += $component_weights['weight3'] * $component3_score;
+        $component3_score = (($student_scores['subcompscores6'] / 60) + ($student_scores['subcompscores7'] / 60) + ($student_scores['subcompscores8'] / 60)) / 3;
+        $total_score += $component_weights['weight3'] * $component3_score;
 
-            // Component 4: Subcomponent 9, 10 & 11
-            $component4_score = (($student_scores['subcompscores9'] / 60) + ($student_scores['subcompscores10'] / 60) + ($student_scores['subcompscores11'] / 60)) / 3;
-            $total_score += $component_weights['weight4'] * $component4_score;
+        $component4_score = (($student_scores['subcompscores9'] / 60) + ($student_scores['subcompscores10'] / 60) + ($student_scores['subcompscores11'] / 60)) / 3;
+        $total_score += $component_weights['weight4'] * $component4_score;
 
-            // Calculate the final grade (percentage)
-            $grade = $total_score * 100; // To get percentage
-            $grade = number_format($grade, 2);  // Format grade to 2 decimal places
-
-            // Store the grade in the grades array with student_num as the key
-            $grades[$student_num] = $grade;
-        } else {
-            // If no scores are found for the student, mark the grade as "Not Available"
-            $grades[$student_num] = "Not Available";
-        }
+        $grade = $total_score * 100;
+        $grades[$student_scores['student_id']] = number_format($grade, 2);
     }
 
     return $grades;
 }
+
+// Call the function to calculate grades
+$grades = calculateGrades($pdo);
 ?>
