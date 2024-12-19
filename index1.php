@@ -137,8 +137,8 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
     <section class="sidepanel">
         <div id="profile">
             <img src="imgs/rooster.jpg" alt="rooster" class="circle-image" id="profile-img">
-            <h2 id="profile-name">Fred Rooster</h2>
-            <p id="profile-email">friedfredchicken@gmail.com</p>
+            <h2 id="profile-name"></h2>
+            <p id="profile-email"></p>
         </div>
 
         <div class="sidebuttons">
