@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const loginForm = document.getElementById('loginForm'); 
+    const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
     const login = document.getElementById('login-btn');
     const signup = document.getElementById('signup-btn');
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const profileName = document.getElementById('profile-name');
     const profileEmail = document.getElementById('profile-email');
     let isLoggedIn = false;
-    console.log("Successful DOM loaded");
+    console.log("successful DOM");
 
     // loginform
     login.addEventListener('click', () => {
@@ -22,20 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // alternate between forms
     document.getElementById("showSignUp").addEventListener("click", () => {
-        popupForm.style.display = "none"; 
-        popupForm1.style.display = "flex"; 
+        popupForm.style.display = "none";
+        popupForm1.style.display = "flex";
     });
 
     document.getElementById("showLogin").addEventListener("click", () => {
         popupForm1.style.display = "none";
-        popupForm.style.display = "flex"; 
+        popupForm.style.display = "flex";
     });
 
     // display login upon laod
-    popupForm.style.display = 'flex'; 
+    popupForm.style.display = 'flex';
 
     // login form submission
-    loginForm.addEventListener('submit', function(event) {
+    loginForm.addEventListener('submit', function (event) {
         event.preventDefault();  // prevent page reload
 
         const username = document.getElementById('username').value;
@@ -56,30 +56,32 @@ document.addEventListener("DOMContentLoaded", () => {
             method: 'POST',
             body: data
         })
-        .then(response => response.json()) // parse json response from php
-        .then(data => {
-            if (data.success) {
-                popupForm.style.display = 'none'; 
-                console.log('Login successful!');
-                isLoggedIn = true;
+            .then(response => response.json()) // parse json response from php
+            .then(data => {
+                if (data.success) {
+                    popupForm.style.display = 'none';
+                    console.log('Login successful!');
+                    isLoggedIn = true;
 
-                // Update profile section 
-                profileName.textContent = data.user.user_fname + ' ' + data.user.user_lname; 
-                profileEmail.textContent = data.user.email; 
+                    // Update profile section 
+                    profileName.textContent = data.user.user_fname + ' ' + data.user.user_lname;
+                    profileEmail.textContent = data.user.email;
+                    console.log("Profile Name Element:", profileName);
+                    console.log("Profile Email Element:", profileEmail);
 
-                window.addEventListener('click', (event) => {
-                    if (event.target === popupForm || event.target === popupForm1) {
-                        popupForm.style.display = 'none';
-                        popupForm1.style.display = 'none';
-                    }
-                });
-            } else {
-                alert('Invalid username or password!');
-            }
-        })
-        .catch(error => {
-            console.error('Error during login:', error);
-        });
+                    window.addEventListener('click', (event) => {
+                        if (event.target === popupForm || event.target === popupForm1) {
+                            popupForm.style.display = 'none';
+                            popupForm1.style.display = 'none';
+                        }
+                    });
+                } else {
+                    alert('Invalid username or password!');
+                }
+            })
+            .catch(error => {
+                console.error('Error during login:', error);
+            });
     });
 
     // signup form submission
@@ -106,20 +108,28 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             // AJAX request to login.php to register the new account
             fetch("/infosec/login.php", { method: "POST", body: data })
-            .then((response) => response.json())
-            // Parse the JSON response from PHP
-            .then((data) => {
-                if (data.success) {
-                    popupForm1.style.display = "none";
-                    console.log("Account created successfully!");
-                    alert("Account created successfully!");
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch((error) => {
-                console.error("Error during signup:", error);
-            });
+                .then((response) => response.json())
+                // Parse the JSON response from PHP
+                .then((data) => {
+                    if (data.success) {
+                        popupForm1.style.display = "none";
+                        console.log("Account created successfully!");
+                        alert("Account created successfully!");
+
+                        console.log(fname, lname, username, email, password);
+
+                        console.log("Profile Name Element:", profileName);
+                        console.log("Profile Email Element:", profileEmail);
+
+                        profileName.textContent = fname + ' ' + lname;
+                        profileEmail.textContent = email;
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during signup:", error);
+                });
         });
     }
 

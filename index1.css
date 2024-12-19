@@ -11,7 +11,7 @@ body {
     width: 15%;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
 }
 
 .circle-image {
@@ -19,7 +19,7 @@ body {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     margin-top: 30px;
 }
 
@@ -28,7 +28,7 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 button {
@@ -36,61 +36,66 @@ button {
     font-weight: bold;
 }
 
-#profile h2, #profile p {
+#profile h2,
+#profile p {
     margin: 0;
     padding: 0;
     padding-bottom: 1%;
 }
 
 .sidebuttons {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 1.2em;
-    margin-top: 40px; 
-   
+    margin-top: 40px;
+
 }
 
-#login-btn, #signup-btn{
-    background-color: white; 
-    color: black; 
+#login-btn,
+#signup-btn {
+    background-color: white;
+    color: black;
     border-radius: 20px;
     width: 300%;
-    padding: 8px; 
-    font-size: 1em; 
-    cursor: pointer; 
-    box-sizing: border-box; 
+    padding: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    box-sizing: border-box;
     transition: transform 0.2s ease, box-shadow 0.5s ease;
 }
 
 
-#login-btn:hover, #signup-btn:hover {
+#login-btn:hover,
+#signup-btn:hover {
     background-color: #5C8F6D;
-    transform: scale(1.04); 
+    transform: scale(1.04);
 }
 
 /* popup form styling */
-.popup-form, .popup-form1{
-    display: none; 
+.popup-form,
+.popup-form1 {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-.form-container, .form-container1 {
+.form-container,
+.form-container1 {
     background-color: white;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     width: 300px;
     text-align: center;
-    
+
 }
 
 .close-button {
@@ -115,7 +120,7 @@ input:focus {
     border-color: #5C8F6D;
 }
 
-button[type="submit"]{
+button[type="submit"] {
     width: 100%;
     background-color: #494b49;
     border: none;
@@ -125,7 +130,7 @@ button[type="submit"]{
     cursor: pointer;
 }
 
-button[type="button"]{
+button[type="button"] {
     margin-top: 2%;
     width: 100%;
     background-color: #494b49;
@@ -136,7 +141,8 @@ button[type="button"]{
     cursor: pointer;
 }
 
-button[type="submit"]:hover, button[type="button"]:hover{
+button[type="submit"]:hover,
+button[type="button"]:hover {
     background-color: #5C8F6D;
     border-radius: 10px;
 }
@@ -164,62 +170,65 @@ button[type="submit"]:hover, button[type="button"]:hover{
 
 .toppanel {
     position: fixed;
-    left: 15%; /* This starts the top panel from the right of the side panel */
-    right: 0; /* Fills the rest of the width */ 
+    left: 15%;
+    /* This starts the top panel from the right of the side panel */
+    right: 0;
+    /* Fills the rest of the width */
     padding: 0.5em;
     z-index: 10;
 }
 
-#sheet-title{
+#sheet-title {
     margin-left: 0.5%;
 }
+
 #sheet-title input {
     font-family: inherit;
     margin-top: 0%;
     margin-bottom: 1.5%;
-    padding: 10px; 
-    border: 3px solid #000; 
-    border-radius: 15px; 
-    background-color: #CADEC8; 
-    font-weight: 800;  
-    font-size: 30px; 
-    white-space: nowrap; 
+    padding: 10px;
+    border: 3px solid #000;
+    border-radius: 15px;
+    background-color: #CADEC8;
+    font-weight: 800;
+    font-size: 30px;
+    white-space: nowrap;
     width: auto;
 }
 
 #topbuttons {
     display: flex;
-    justify-content: space-around; 
-    align-items: center; 
-    padding: 10px; 
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
 }
 
 .button-container {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .button-container button {
-    background-color: transparent; 
+    background-color: transparent;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.5s ease;
 }
 
 .button-container button:hover {
     border-radius: 10px;
-    transform: scale(1.1); 
+    transform: scale(1.1);
 }
 
 .button-container h2 {
     margin-top: 8px;
     font-size: 1em;
-    color: #000; 
+    color: #000;
 }
 
 #topbuttons img {
-    width: 55px; 
+    width: 55px;
     height: 55px;
     object-fit: contain;
     display: block;
@@ -231,36 +240,47 @@ button[type="submit"]:hover, button[type="button"]:hover{
 .table-container {
     width: 85%;
     margin: 0 auto;
-    margin-top: 14%; /* Create space for the top panel */
-    overflow-x: auto; /* Allows horizontal scrolling if the table is too wide */
+    margin-top: 14%;
+    /* Create space for the top panel */
+    overflow-x: auto;
+    /* Allows horizontal scrolling if the table is too wide */
 }
 
-@media (max-width: 1620px), (max-width: 1280px), (max-width: 1510px) {
+@media (max-width: 1620px),
+(max-width: 1280px),
+(max-width: 1510px) {
     .table-container {
         width: 85%;
         margin: 0 auto;
-        margin-top: 18%; 
-        overflow-x: auto; 
+        margin-top: 18%;
+        overflow-x: auto;
     }
 
-    .sidebutton{
+    .sidebutton {
         font-size: 0.7em;
     }
 
-    #profile{
+    #profile {
         font-size: 0.8em;
-    
+
     }
 
-    #login-btn, #signup-btn{
-        background-color: white; /* Button background color */
-        color: black; /* Text color */
+    #login-btn,
+    #signup-btn {
+        background-color: white;
+        /* Button background color */
+        color: black;
+        /* Text color */
         border-radius: 20px;
         width: 270%;
-        padding: 8px; /* Reduced padding for better fit */
-        font-size: 0.8em; /* Adjust font size for readability */
-        cursor: pointer; /* Change the cursor to indicate a clickable element */
-        box-sizing: border-box; /* Ensures padding and borders are included in width calculation */
+        padding: 8px;
+        /* Reduced padding for better fit */
+        font-size: 0.8em;
+        /* Adjust font size for readability */
+        cursor: pointer;
+        /* Change the cursor to indicate a clickable element */
+        box-sizing: border-box;
+        /* Ensures padding and borders are included in width calculation */
         transition: transform 0.2s ease, box-shadow 0.5s ease;
     }
 }
@@ -270,10 +290,13 @@ button[type="submit"]:hover, button[type="button"]:hover{
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    table-layout:fixed;
+    table-layout: fixed;
 }
 
-#subject-name, #term, #section, #ay {
+#subject-name,
+#term,
+#section,
+#ay {
     width: 30%;
 }
 
@@ -284,7 +307,11 @@ button[type="submit"]:hover, button[type="button"]:hover{
     text-align: center;
 }
 
-#editable-table th, #subject-name, #term, #section, #ay {
+#editable-table th,
+#subject-name,
+#term,
+#section,
+#ay {
     background-color: #CADEC8;
     color: black;
     font-weight: bold;
@@ -292,11 +319,13 @@ button[type="submit"]:hover, button[type="button"]:hover{
 
 /* Alternating Row Colors */
 #editable-table tr:nth-child(odd) {
-    background-color: #7ABD87;  /* Color for odd rows */
+    background-color: #7ABD87;
+    /* Color for odd rows */
 }
 
 #editable-table tr:nth-child(even) {
-    background-color: #CADEC8;  /* Color for even rows */
+    background-color: #CADEC8;
+    /* Color for even rows */
 }
 
 [contenteditable="true"] {
@@ -329,10 +358,6 @@ button:hover {
     background-color: #5C8F6D;
 }
 
-th{
+th {
     text-align: center;
 }
-
-
-
-

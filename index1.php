@@ -155,7 +155,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
 
         <div id="topbuttons">
             <div class="button-container">
-                <a href="insert_row.php"><img src="imgs/section.png" alt="section"></a> <!-- Add row feature -->
+                <button> <a href="insert_row.php"><img src="imgs/section.png" alt="section"></a> </button> <!-- Add row feature -->
                 <h2>Add Row</h2>
             </div>
             <div class="button-container">
