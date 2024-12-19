@@ -68,9 +68,6 @@ try {
     $scores = []; // Fallback
 }
 
-$i = 1; // Initialize the variable
-
-
 // Define an array of student numbers (can also come from a database query)
 if (!isset($pdo) || !$pdo instanceof PDO) {
     die("Database connection is not properly configured.");
@@ -257,7 +254,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                         : null; // Default to null if no score is found
                 ?>
                 <tr>
-                    <td><input type="text" id="no" name="no" value="<?= $i++; ?>"></td>
+                    <td><input type="text" id="no" name="no" value="<?= $i+1; ?>"></td>
                     <td colspan="2"><input type="text" id="student-no" name="student-no" value="<?= htmlspecialchars($student['student_num']); ?>"></td>
                     <td colspan="6"><input type="text" id="fullname" name="fullname" value="<?= htmlspecialchars($student['fullname']); ?>"></td>
                     <td colspan="2"><input type="text" id="course" name="course" value="<?= htmlspecialchars($student['course']); ?>"></td>

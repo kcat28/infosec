@@ -8,7 +8,7 @@
             // if not, it uses an empty value (null) instead. This helps the program avoid errors when something is missing.
             $student_id = isset($_POST['student_id']) ? $_POST['student_id'] : null;
             $subcomp_id = isset($_POST['subcomp_id']) ? $_POST['subcomp_id'] : null;
-            $student_num = isset($_POST['student_num']) && !empty($_POST['student_num']) ? $_POST['student_num'] : null;
+            $student_num = isset($_POST['student_num']) && !empty($_POST['student_num']) ? $_POST['student_num'] : '';
             $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : ''; 
             $course = isset($_POST['course']) ? $_POST['course'] : ''; 
             

@@ -806,3 +806,23 @@ Stack trace:
 [16-Dec-2024 05:21:00 Europe/Berlin] PHP Warning:  Undefined variable $stundetScore in C:\xampp\htdocs\infosec\index1.php on line 268
 [16-Dec-2024 05:21:00 Europe/Berlin] PHP Warning:  Undefined variable $stundetScore in C:\xampp\htdocs\infosec\index1.php on line 268
 [16-Dec-2024 05:21:00 Europe/Berlin] PHP Warning:  Undefined variable $stundetScore in C:\xampp\htdocs\infosec\index1.php on line 268
+[19-Dec-2024 16:05:44 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:05:44 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:05:44 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:05:44 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:05:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:05:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:05:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:05:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:05:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:12:33 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:14:34 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:16:49 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:16:49 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:17:36 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:17:36 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:18:10 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:18:10 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:18:55 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:25:42 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
+[19-Dec-2024 16:25:51 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\infosec\index1.php on line 261
