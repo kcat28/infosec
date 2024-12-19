@@ -75,9 +75,6 @@ $i = 1; // Initialize the variable
 if (!isset($pdo) || !$pdo instanceof PDO) {
     die("Database connection is not properly configured.");
 }
-
-
-
 ?>
 
 
@@ -158,7 +155,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
 
         <div id="topbuttons">
             <div class="button-container">
-                <button id="addRowBtn"><img src="imgs/section.png" alt="section"></button>
+                <a href="insert_row.php"><img src="imgs/section.png" alt="section"></a> <!-- Add row feature -->
                 <h2>Add Row</h2>
             </div>
             <div class="button-container">

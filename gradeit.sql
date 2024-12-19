@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2024 at 07:08 AM
+-- Generation Time: Dec 17, 2024 at 06:17 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -100,7 +100,15 @@ INSERT INTO `scores` (`score_id`, `subcomp_id`, `student_id`, `subcompscores1`, 
 (34, 9, 7, 60.00, 1.00, 1.00, 0.00, 1.00, 1.00, 0.00, 1.00, 1.00, 0.00, 1.00, 0.00),
 (35, 9, 8, 22.00, 1.00, 1.00, 0.00, 1.00, 1.00, 0.00, 1.00, 1.00, 0.00, 1.00, 0.00),
 (37, 9, 9, 60.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 0.00),
-(38, 9, 10, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 0.00);
+(38, 9, 10, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 0.00),
+(45, 9, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(46, 9, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(47, 9, 6, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(48, 9, 6, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(49, 9, 11, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(50, 9, 15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(51, 9, 16, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(52, 9, 17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00);
 
 -- --------------------------------------------------------
 
@@ -110,7 +118,7 @@ INSERT INTO `scores` (`score_id`, `subcomp_id`, `student_id`, `subcompscores1`, 
 
 CREATE TABLE `students` (
   `student_id` int(10) NOT NULL,
-  `student_num` varchar(11) NOT NULL,
+  `student_num` varchar(255) DEFAULT NULL,
   `fullname` varchar(255) NOT NULL,
   `course` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
@@ -124,7 +132,11 @@ INSERT INTO `students` (`student_id`, `student_num`, `fullname`, `course`) VALUE
 (7, '2020-202020', 'Bini Lat', 'BSIT'),
 (8, '2021-212121', 'Jepoy', 'BSCS'),
 (9, '2021-212125', 'Jggcepoy', 'BSCS'),
-(10, '2021-252125', 'Jgg66cepoy', 'BSCS');
+(10, '2021-252125', 'Jgg66cepoy', 'BSCS'),
+(11, '', '', ''),
+(15, NULL, '', ''),
+(16, NULL, '', ''),
+(17, NULL, '', '');
 
 -- --------------------------------------------------------
 
@@ -179,7 +191,8 @@ INSERT INTO `users` (`user_id`, `user_fname`, `user_lname`, `username`, `email`,
 (17, 'Nicole', 'Danga', 'dsadsada', 'dayana@gmail.com', '$2y$10$B5bfkSWX49YC7fNEss6XTOEgJ33Sldv8e4DpJmLuEvis5/2xwqjk2'),
 (18, 'jef', 'jef', 'jef', 'jef@gmail.com', '$2y$10$cdyr6IfqLVxexedad8Px/udYBQyCIa7gE4lDhuv24vtZ6uBTzBLte'),
 (19, 'Nicole', 'Danga', 'sadad', 'dayana123@gmail.com', '12345678'),
-(20, 'Lotlot', 'Deleon', 'lotty', 'lotty@gmail.com', '12345678');
+(20, 'Lotlot', 'Deleon', 'lotty', 'lotty@gmail.com', '12345678'),
+(21, 'JASCENT PEARL', 'NAVARRO', 'pearl', 'navarrojg@students.national-u.edu.ph', '12345678');
 
 --
 -- Indexes for dumped tables
@@ -211,7 +224,8 @@ ALTER TABLE `scores`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`student_id`),
-  ADD UNIQUE KEY `student_num` (`student_num`);
+  ADD UNIQUE KEY `student_num` (`student_num`),
+  ADD UNIQUE KEY `student_num_2` (`student_num`);
 
 --
 -- Indexes for table `subcomponents`
@@ -246,13 +260,13 @@ ALTER TABLE `gradingsystem`
 -- AUTO_INCREMENT for table `scores`
 --
 ALTER TABLE `scores`
-  MODIFY `score_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `score_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `student_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `subcomponents`
@@ -264,7 +278,7 @@ ALTER TABLE `subcomponents`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
