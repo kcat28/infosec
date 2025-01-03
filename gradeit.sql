@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 06:17 AM
+-- Host: localhost
+-- Generation Time: Jan 03, 2025 at 07:11 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,7 @@ CREATE TABLE `components_weights` (
 --
 
 INSERT INTO `components_weights` (`comp_id`, `gradingsystem_id`, `weight1`, `component1`, `weight2`, `component2`, `weight3`, `component3`, `weight4`, `component4`) VALUES
-(4, 2, 0.40, 'examn', 0.20, 'assessment', 0.30, 'Bwakanangshet', 0.10, 'Ayokona');
+(4, 2, 0.40, 'Exam', 0.20, 'Assessment', 0.30, 'Project', 0.10, 'Written Works');
 
 -- --------------------------------------------------------
 
@@ -97,18 +97,10 @@ CREATE TABLE `scores` (
 --
 
 INSERT INTO `scores` (`score_id`, `subcomp_id`, `student_id`, `subcompscores1`, `subcompscores2`, `subcompscores3`, `subcompscores4`, `subcompscores5`, `subcompscores6`, `subcompscores7`, `subcompscores8`, `subcompscores9`, `subcompscores10`, `subcompscores11`, `grade`) VALUES
-(34, 9, 7, 60.00, 1.00, 1.00, 0.00, 1.00, 1.00, 0.00, 1.00, 1.00, 0.00, 1.00, 0.00),
-(35, 9, 8, 22.00, 1.00, 1.00, 0.00, 1.00, 1.00, 0.00, 1.00, 1.00, 0.00, 1.00, 0.00),
-(37, 9, 9, 60.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 0.00),
-(38, 9, 10, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 60.00, 0.00),
-(45, 9, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(46, 9, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(47, 9, 6, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
-(48, 9, 6, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
-(49, 9, 11, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
-(50, 9, 15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
-(51, 9, 16, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
-(52, 9, 17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00);
+(102, 9, 1, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL),
+(103, 9, 2, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL),
+(108, 9, 3, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL),
+(112, 9, 432, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -128,15 +120,10 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `student_num`, `fullname`, `course`) VALUES
-(6, '2022-104741', 'Diana Danga', 'BSCS'),
-(7, '2020-202020', 'Bini Lat', 'BSIT'),
-(8, '2021-212121', 'Jepoy', 'BSCS'),
-(9, '2021-212125', 'Jggcepoy', 'BSCS'),
-(10, '2021-252125', 'Jgg66cepoy', 'BSCS'),
-(11, '', '', ''),
-(15, NULL, '', ''),
-(16, NULL, '', ''),
-(17, NULL, '', '');
+(1, '2021-100201', 'Allen', 'BSCS-ML'),
+(2, '2021-100202', 'Jep', 'skrt'),
+(3, '2021-tamanaa', 'tapos kana', '90'),
+(432, '2021-tamanaa223', 'tapos kana', '90');
 
 -- --------------------------------------------------------
 
@@ -165,7 +152,7 @@ CREATE TABLE `subcomponents` (
 --
 
 INSERT INTO `subcomponents` (`subcomp_id`, `comp_id`, `subcomponent1`, `subcomponent2`, `subcomponent3`, `subcomponent4`, `subcomponent5`, `subcomponent6`, `subcomponent7`, `subcomponent8`, `subcomponent9`, `subcomponent10`, `subcomponent11`) VALUES
-(9, 4, 'Hotdog', 'Burger', 'Spag', 'Egg', 'Palabok', 'Bonak', 'Panot', 'si', 'Romano', 'Science', 'EK');
+(9, 4, 'Exam 1', 'Exam 2', 'A1', 'A2', 'A3', 'P1', 'P2', 'P3', 'WW1', 'WW2', 'WW3');
 
 -- --------------------------------------------------------
 
@@ -187,12 +174,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_fname`, `user_lname`, `username`, `email`, `password`) VALUES
-(16, 'diana', 'danga', 'dayana', '@gmail.com', '12345678'),
-(17, 'Nicole', 'Danga', 'dsadsada', 'dayana@gmail.com', '$2y$10$B5bfkSWX49YC7fNEss6XTOEgJ33Sldv8e4DpJmLuEvis5/2xwqjk2'),
-(18, 'jef', 'jef', 'jef', 'jef@gmail.com', '$2y$10$cdyr6IfqLVxexedad8Px/udYBQyCIa7gE4lDhuv24vtZ6uBTzBLte'),
-(19, 'Nicole', 'Danga', 'sadad', 'dayana123@gmail.com', '12345678'),
-(20, 'Lotlot', 'Deleon', 'lotty', 'lotty@gmail.com', '12345678'),
-(21, 'JASCENT PEARL', 'NAVARRO', 'pearl', 'navarrojg@students.national-u.edu.ph', '12345678');
+(18, 'jef', 'jef', 'jef', 'jef@gmail.com', '1234');
 
 --
 -- Indexes for dumped tables
@@ -260,13 +242,7 @@ ALTER TABLE `gradingsystem`
 -- AUTO_INCREMENT for table `scores`
 --
 ALTER TABLE `scores`
-  MODIFY `score_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT for table `students`
---
-ALTER TABLE `students`
-  MODIFY `student_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `score_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `subcomponents`
