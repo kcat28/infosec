@@ -73,8 +73,7 @@ button {
 }
 
 /* popup form styling */
-.popup-form,
-.popup-form1 {
+.popup-form{
     display: none;
     position: fixed;
     top: 0;
@@ -87,16 +86,19 @@ button {
     z-index: 1000;
 }
 
-.form-container,
-.form-container1 {
-    background-color: white;
+.form-container {
+     background-color: white;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    width: 300px;
+    width: 90%;
+    max-width: 300px;
+    max-height: 80vh; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
     text-align: center;
 
 }
+
 
 .close-button {
     position: absolute;

@@ -81,7 +81,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Grading System</title>
-    <link rel="stylesheet" href="index1.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
@@ -129,6 +129,80 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             </form>
         </div>
     </div>
+    <!-- Add Row Popup -->
+    <div id="popupFormAddRow" class="popup-form">
+        <div class="form-container">
+            <h2>Add New Row</h2>
+
+            <form id="addRowForm" method="POST" action="addRow.php">
+
+                <label for="new-id-no">Id No:</label>
+                <input type="text" id="new-id-no" name="new-id-no" required />
+
+                <label for="new-student-no">Student No:</label>
+                <input type="text" id="new-student-no" name="new-student-no" required />
+
+                <label for="new-fullname">Full Name:</label>
+                <input type="text" id="new-fullname" name="new-fullname" required />
+
+                <label for="new-course">Course:</label>
+                <input type="text" id="new-course" name="new-course" required />
+
+                <?php for ($i = 1; $i <= 11; $i++): ?>
+                <label for="new-subcomponent<?= $i ?>">Subcomponent <?= $i ?>:</label>
+                <input type="text" id="new-subcomponent<?= $i ?>" name="new-subcomponent<?= $i ?>" required />
+                <?php endfor; ?>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+        <!-- Edit Row Popup -->
+    <div id="popupFormEditRow" class="popup-form">
+        <div class="form-container">
+            <h2>Edit Row</h2>
+
+            <form id="editRowForm" method="POST" action="editRow.php">
+
+                <label for="edit-id-no">Id No:</label>
+                <input type="text" id="edit-id-no" name="edit-id-no" required />
+
+                <label for="edit-student-no">Student No:</label>
+                <input type="text" id="edit-student-no" name="edit-student-no" required />
+
+                <label for="edit-fullname">Full Name:</label>
+                <input type="text" id="edit-fullname" name="edit-fullname" required />
+
+                <label for="edit-course">Course:</label>
+                <input type="text" id="edit-course" name="edit-course" required />
+
+                <?php for ($i = 1; $i <= 11; $i++): ?>
+                <label for="edit-subcomponent<?= $i ?>">Subcomponent <?= $i ?>:</label>
+                <input type="text" id="edit-subcomponent<?= $i ?>" name="edit-subcomponent<?= $i ?>" required />
+                <?php endfor; ?>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Del Row Popup -->
+    <div id="popupFormDelRow" class="popup-form">
+        <div class="form-container">
+            <h2>Delete Row</h2>
+
+            <form id="delRowForm" method="POST" action="delRow.php">
+
+                <label for="id-no-del">Id No:</label>
+                <input type="text" id="id-no-del" name="id-no-del" required />
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+   
 
     <!-- Side Panel -->
     <section class="sidepanel">
@@ -152,16 +226,12 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
 
         <div id="topbuttons">
             <div class="button-container">
-                <button> <a href="insert_row.php"><img src="imgs/section.png" alt="section"></a> </button> <!-- Add row feature -->
+                <button id="addBtn"> <img src="imgs/section.png" alt="addrow"> </button> 
                 <h2>Add Row</h2>
             </div>
             <div class="button-container">
-                <button id="editBtn"><img src="imgs/table.png" alt="table"></button>
+                <button id="editBtn"><img src="imgs/table.png" alt="edit"></button>
                 <h2>Edit</h2>
-            </div>
-            <div class="button-container">
-                <button id="saveBtn"><img src="imgs/lock.png" alt="lock"></button>
-                <h2>Save (Update)</h2>
             </div>
             <div class="button-container">
                 <button id="deleteBtn"><img src="imgs/delete.png" alt="delete"></button>
@@ -252,9 +322,10 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                     $studentScore = isset($scoresByStudentNum[$student['student_id']]) 
                         ? $scoresByStudentNum[$student['student_id']] 
                         : null; // Default to null if no score is found
+                        
                 ?>
                 <tr>
-                    <td><input type="text" id="no" name="no" value="<?= $i+1; ?>"></td>
+                    <td><input type="text" id="no" value="<?= htmlspecialchars($student['student_id']); ?>"readonly></td>
                     <td colspan="2"><input type="text" id="student-no" name="student-no" value="<?= htmlspecialchars($student['student_num']); ?>"></td>
                     <td colspan="6"><input type="text" id="fullname" name="fullname" value="<?= htmlspecialchars($student['fullname']); ?>"></td>
                     <td colspan="2"><input type="text" id="course" name="course" value="<?= htmlspecialchars($student['course']); ?>"></td>
@@ -303,5 +374,8 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
         </form>
     </div>
     <script src="index1.js"></script>
+    <script src="addRow.js"></script>
+    <script src="delRow.js"></script>
+    <script src="editRow.js"></script>
 </body>
 </html>
