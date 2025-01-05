@@ -1,12 +1,15 @@
 <?php 
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+error_reporting(E_ALL);
+
 
 // Connection to the database
 $host = 'localhost';
-$db = 'gradeit';
-$user = 'root';
-$pass = '';
+$db = 'u415861906_infosec2236';
+$user = 'u415861906_infosec2236';
+$pass = 'r$Y9G>xxQQkOT6t|';
 $charset = 'utf8mb4';
 
 try {
@@ -15,7 +18,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     error_log('Database connection failed: ' . $e->getMessage());
-    echo json_encode(['success' => false, 'message' => 'Database connection failed']);
+    echo json_encode(['success' => false, 'message' => 'Database connection failedd']);
     exit();
 }
 
@@ -677,6 +680,10 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             width: 30%;
         }
 
+        #subject-name-td, #term-td{
+            background-color: #CADEC8;
+        }
+
         #editable-table th,
         #editable-table td {
             border: 2px solid black;
@@ -693,10 +700,6 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             color: black;
             font-weight: bold;
             text-align: center;
-        }
-
-        #subject-name-td, #term-td{
-            background-color: #CADEC8;
         }
 
         /* Alternating Row Colors */
@@ -891,7 +894,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
     <!-- Side Panel -->
     <section class="sidepanel">
         <div id="profile">
-            <img src="imgs/rooster.jpg" alt="rooster" class="circle-image" id="profile-img">
+            <img src="rooster.jpg" alt="rooster" class="circle-image" id="profile-img">
             <h2 id="profile-name"></h2>
             <p id="profile-email"></p>
         </div>
@@ -910,15 +913,15 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
 
         <div id="topbuttons">
             <div class="button-container">
-                <button id="addBtn"> <img src="imgs/section.png" alt="addrow"> </button> 
+                <button id="addBtn"> <img src="section.png" alt="addrow"> </button> 
                 <h2>Add Row</h2>
             </div>
             <div class="button-container">
-                <button id="editBtn"><img src="imgs/table.png" alt="edit"></button>
+                <button id="editBtn"><img src="table.png" alt="edit"></button>
                 <h2>Edit</h2>
             </div>
             <div class="button-container">
-                <button id="deleteBtn"><img src="imgs/delete.png" alt="delete"></button>
+                <button id="deleteBtn"><img src="delete.png" alt="delete"></button>
                 <h2>Delete</h2>
             </div>
         </div>
@@ -932,9 +935,9 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                     <?php foreach ($gradingsystem as $gs): ?>
                         <tr>
                             <th colspan="3">SUBJECT NAME:</th>
-                            <td colspan="6"><input type="text" id="subject-name" name="subject-name[]" value="<?= $gs['subject_name']; ?>"></td>
+                            <td colspan="6" id="subject-name-td"><input type="text" id="subject-name" name="subject-name[]" value="<?= $gs['subject_name']; ?>"></td>
                             <th colspan="2">TERM:</th>
-                            <td colspan="12"><input type="text" id="term" name="term[]" value="<?= $gs['term']; ?>"></td>
+                            <td colspan="12" id="term-td"><input type="text" id="term" name="term[]" value="<?= $gs['term']; ?>"></td>
                         </tr>
                         <tr>
                             <th colspan="3">SECTION:</th>
@@ -1134,7 +1137,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             data.append('username', username);
             data.append('password', password);
 
-            fetch('/infosec/index.php', {
+            fetch('index.php', {
                 method: 'POST',
                 body: data
             })
@@ -1192,7 +1195,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                 console.log(pair[0] + ": " + pair[1]);
             }
             // AJAX request to login.php to register the new account
-            fetch("/infosec/index.php", { method: "POST", body: data })
+            fetch("index.php", { method: "POST", body: data })
                 .then((response) => response.json())
                 // Parse the JSON response from PHP
                 .then((data) => {
@@ -1258,7 +1261,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                 data.append(`new-subcomponent${i}`, subcomponent);
             }
 
-            fetch('/infosec/index.php', {
+            fetch('index.php', {
                 method: 'POST',
                 body: data
             })
@@ -1304,7 +1307,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
         data.append('action', 'delrow');
         data.append('id-no-del', studentId);
 
-        fetch('/infosec/index.php', {
+        fetch('index.php', {
             method: 'POST',
             body: data
         })
@@ -1362,7 +1365,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                 data.append(`edit-subcomponent${i}`, subcomponent);
             }
 
-            fetch('/infosec/index.php', {
+            fetch('index.php', {
                 method: 'POST',
                 body: data
             })
