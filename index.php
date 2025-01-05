@@ -6,11 +6,11 @@ error_reporting(E_ALL);
 
 
 // Connection to the database
-$host = 'localhost';
-$db = 'u415861906_infosec2236';
-$user = 'u415861906_infosec2236';
-$pass = 'r$Y9G>xxQQkOT6t|';
-$charset = 'utf8mb4';
+$host = '';
+$db = '';
+$user = '';
+$pass = '';
+$charset = '';
 
 try {
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
