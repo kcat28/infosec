@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 03, 2025 at 07:11 PM
+-- Generation Time: Jan 05, 2025 at 05:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -97,10 +97,9 @@ CREATE TABLE `scores` (
 --
 
 INSERT INTO `scores` (`score_id`, `subcomp_id`, `student_id`, `subcompscores1`, `subcompscores2`, `subcompscores3`, `subcompscores4`, `subcompscores5`, `subcompscores6`, `subcompscores7`, `subcompscores8`, `subcompscores9`, `subcompscores10`, `subcompscores11`, `grade`) VALUES
-(102, 9, 1, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL),
-(103, 9, 2, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL),
-(108, 9, 3, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL),
-(112, 9, 432, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL);
+(117, 9, 2, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL),
+(119, 9, 3, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL),
+(120, 9, 4, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, 90.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -120,10 +119,10 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `student_num`, `fullname`, `course`) VALUES
-(1, '2021-100201', 'Allen', 'BSCS-ML'),
-(2, '2021-100202', 'Jep', 'skrt'),
-(3, '2021-tamanaa', 'tapos kana', '90'),
-(432, '2021-tamanaa223', 'tapos kana', '90');
+(1, '2020', 'Diana Nicole Danga', 'BSCS-ML'),
+(2, '2021', 'Diana Nicole Danga', 'BSCS-ML'),
+(3, '2022', 'Jascent Pearl Navarro', 'BSCS-ML'),
+(4, '2023', 'Allen Siaton', 'BSCS-ML');
 
 -- --------------------------------------------------------
 
@@ -174,7 +173,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_fname`, `user_lname`, `username`, `email`, `password`) VALUES
-(18, 'jef', 'jef', 'jef', 'jef@gmail.com', '1234');
+(18, 'jef', 'jef', 'jef', 'jef@gmail.com', '1234'),
+(22, 'kurt', 'kurt', 'kurt', 'kurt@gmail.com', '1234'),
+(23, 'Kurt', 'Kuh', 'hurt', 'hurt@gmail.com', '1234');
 
 --
 -- Indexes for dumped tables
@@ -242,7 +243,7 @@ ALTER TABLE `gradingsystem`
 -- AUTO_INCREMENT for table `scores`
 --
 ALTER TABLE `scores`
-  MODIFY `score_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `score_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT for table `subcomponents`
@@ -254,7 +255,7 @@ ALTER TABLE `subcomponents`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
