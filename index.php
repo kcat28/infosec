@@ -1,4 +1,11 @@
-<?php 
+<?php
+
+// Set Content Security Policy (CSP) Header
+header("Content-Security-Policy: default-src 'self'; script-src 'self' https://trusted.cdn.com; style-src 'self' https://trusted.styles.com; frame-ancestors 'none';");
+
+// Prevent Clickjacking
+header("X-Frame-Options: DENY");
+ 
 
 // Mitigate vulnerabilities
 
