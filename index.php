@@ -15,8 +15,8 @@ header("X-Frame-Options: DENY");
 // Mitigate vulnerabilities
 
 // Ensure no sensitive information leaks in redirects
-header("Location: https://craftscripters.xyz/infosec/223_6/", true, 302);
-exit;
+// header("Location: https://craftscripters.xyz/infosec/223_6/", true, 302);
+// exit;
 
 // Disable 'X-Powered-By' header
 header_remove("X-Powered-By");
@@ -37,11 +37,17 @@ error_reporting(E_ALL);
 
 
 // Connection to the database
-$host = ''; 
-$db = '';
-$user = '';
+// $host = ''; 
+// $db = '';
+// $user = '';
+// $pass = '';
+// $charset = '';
+
+$host = 'localhost';
+$db = 'gradeit';
+$user = 'root';
 $pass = '';
-$charset = '';
+$charset = 'utf8mb4';
 
 try {
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -656,6 +662,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             overflow-x: auto;
             /* Allows horizontal scrolling if the table is too wide */
         }
+        
 
         @media (max-width: 1620px),
         (max-width: 1280px),
@@ -704,6 +711,8 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             table-layout: fixed;
         }
 
+       
+
         #subject-name,
         #term,
         #section,
@@ -721,6 +730,12 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             padding: 8px;
             text-align: center;
         }
+
+        #inputs-from-form{
+            font-size: 1em;
+            font-family: inherit;
+        }
+        
 
         #editable-table th,
         #subject-name,
@@ -837,7 +852,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                 <input type="text" id="username-signup" name="username-signup" required/>
 
                 <label for="email-signup">Email:</label>
-                <input type="email" id="email-signup" name="email-signup" required/>
+                <input type="email" id="email-signup" name="email-signup" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address." />
 
                 <label for="password-signup">Password:</label>
                 <input type="password" id="password-signup" name="password-signup" required/>
@@ -847,6 +862,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             </form>
         </div>
     </div>
+    
     <!-- Add Row Popup -->
     <div id="popupFormAddRow" class="popup-form">
         <div class="form-container">
@@ -858,7 +874,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                 <input type="text" id="new-id-no" name="new-id-no" required />
 
                 <label for="new-student-no">Student No:</label>
-                <input type="text" id="new-student-no" name="new-student-no" required />
+                <input type="text" id="new-student-no" name="new-student-no" required maxlength="11"/>
 
                 <label for="new-fullname">Full Name:</label>
                 <input type="text" id="new-fullname" name="new-fullname" required />
@@ -875,6 +891,8 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
             </form>
         </div>
     </div>
+
+    
 
         <!-- Edit Row Popup -->
     <div id="popupFormEditRow" class="popup-form">
@@ -920,12 +938,26 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', () => {
+                    const inputs = form.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]');
+                    inputs.forEach(input => {
+                        input.value = input.value.trim();
+                    });
+                });
+            });
+        });
+    </script>
+
    
 
     <!-- Side Panel -->
     <section class="sidepanel">
         <div id="profile">
-            <img src="rooster.jpg" alt="rooster" class="circle-image" id="profile-img">
+            <img src="imgs/rooster.jpg" alt="rooster" class="circle-image" id="profile-img">
             <h2 id="profile-name"></h2>
             <p id="profile-email"></p>
         </div>
@@ -944,15 +976,15 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
 
         <div id="topbuttons">
             <div class="button-container">
-                <button id="addBtn"> <img src="section.png" alt="addrow"> </button> 
+                <button id="addBtn"> <img src="imgs/section.png" alt="addrow"> </button> 
                 <h2>Add Row</h2>
             </div>
             <div class="button-container">
-                <button id="editBtn"><img src="table.png" alt="edit"></button>
+                <button id="editBtn"><img src="imgs/table.png" alt="edit"></button>
                 <h2>Edit</h2>
             </div>
             <div class="button-container">
-                <button id="deleteBtn"><img src="delete.png" alt="delete"></button>
+                <button id="deleteBtn"><img src="imgs/delete.png" alt="delete"></button>
                 <h2>Delete</h2>
             </div>
         </div>
@@ -960,78 +992,75 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
 
     <!-- Table Form -->
     <div class="table-container">
-        <form method="POST" id="grades-form">
-            <table id="editable-table">
-                <thead>
-                    <?php foreach ($gradingsystem as $gs): ?>
-                        <tr>
-                            <th colspan="3">SUBJECT NAME:</th>
-                            <td colspan="6" id="subject-name-td"><input type="text" id="subject-name" name="subject-name[]" value="<?= $gs['subject_name']; ?>"></td>
-                            <th colspan="2">TERM:</th>
-                            <td colspan="12" id="term-td"><input type="text" id="term" name="term[]" value="<?= $gs['term']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <th colspan="3">SECTION:</th>
-                            <td colspan="6"><input type="text" id="section" name="section[]" value="<?= $gs['section']; ?>"></td>
-                            <th colspan="2">A.Y.:</th>
-                            <td colspan="12"><input type="text" id="acad_year" name="acad_year[]" value="<?= $gs['acad_year']; ?>"></td>
-                        </tr>
-                        <?php endforeach; ?>
-                        <tr>
-                            <th>No.</th>
-                            <th colspan="2">Student No.</th>
-                            <th colspan="6">Full Name</th>
-                            <th colspan="2">Course</th>
-                            <?php foreach ($components_weights as $c_w): ?>
-                            <th  colspan="2" class="merged">
-                                <div><input type="text" id="weight1" name="weight1[]" placeholder="%" value="<?= $c_w['weight1']; ?>"></div>
-                                <div><input type="text" id="component1" name="component1[]" value="<?= $c_w['component1']; ?>" placeholder="Component 1"></div>
-                            </th>
-                            <th colspan="3" class="merged">
-                                <div><input type="text" id="weight2" name="weight2[]" value="<?= $c_w['weight2']; ?>" placeholder="%"></div>
-                                <div><input type="text" id="component2" name="component2[]" value="<?= $c_w['component2']; ?>" placeholder="Component 2"></div>
-                            </th>
-                            <th colspan="3" class="merged">
-                                <div><input type="text" id="weight3" name="weight3[]" value="<?= $c_w['weight3']; ?>"placeholder="%"></div>
-                                <div><input type="text" id="component3" name="component3[]" value="<?= $c_w['component3']; ?>" placeholder="Component 3"></div>
-                            </th>
-                            <th colspan="3" class="merged">
-                                <div><input type="text" id="weight4"  name="weight4[]" value="<?= $c_w['weight4']; ?>" placeholder="%"></div>
-                                <div><input type="text" id="component4" name="component4[]" value="<?= $c_w['component4']; ?>" placeholder="Component 4"></div>
-                            </th>
-                            <?php endforeach; ?>
-                            <th>Grade</th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th colspan="2"></th>
-                            <th colspan="6"></th>
-                            <th colspan="2"></th>
-                            <?php foreach ($subcomponents as $subcomp): ?>
-                            <th><input type="text" id="subcomponent1" name="subcomponent1[]" value="<?= $subcomp['subcomponent1']; ?>" ></th>
-                            <th><input type="text" id="subcomponent2" name="subcomponent2[]" value="<?= $subcomp['subcomponent2']; ?>"></th>
-                            <th><input type="text" id="subcomponent3" name="subcomponent3[]" value="<?= $subcomp['subcomponent3']; ?>"></th>
-                            <th><input type="text" id="subcomponent4" name="subcomponent4[]" value="<?= $subcomp['subcomponent4']; ?>"></th>
-                            <th><input type="text" id="subcomponent5" name="subcomponent5[]" value="<?= $subcomp['subcomponent5']; ?>"></th>
-                            <th><input type="text" id="subcomponent6"  name="subcomponent6[]" value="<?= $subcomp['subcomponent6']; ?>"></th>
-                            <th><input type="text" id="subcomponent7" name="subcomponent7[]" value="<?= $subcomp['subcomponent7']; ?>"></th>
-                            <th><input type="text" id="subcomponent8" name="subcomponent8[]" value="<?= $subcomp['subcomponent8']; ?>"></th>
-                            <th><input type="text" id="subcomponent9" name="subcomponent9[]" value="<?= $subcomp['subcomponent9']; ?>"></th>
-                            <th><input type="text" id="subcomponent10" name="subcomponent10[]" value="<?= $subcomp['subcomponent10']; ?>"></th>
-                            <th><input type="text" id="subcomponent11" name="subcomponent11[]" value="<?= $subcomp['subcomponent11']; ?>"></th>
-                            <th></th>
-                            <?php endforeach; ?>
-                        </tr>
-                </thead>
-                <tbody>
+        <table id="editable-table">
+            <thead>
+                <?php foreach ($gradingsystem as $gs): ?>
+                    <tr>
+                        <th colspan="3">SUBJECT NAME:</th>
+                        <td colspan="6" id="subject-name-td"><input type="text" id="subject-name" name="subject-name[]" value="<?= $gs['subject_name']; ?>"></td>
+                        <th colspan="2">TERM:</th>
+                        <td colspan="12" id="term-td"><input type="number" id="term" name="term[]" value="<?= $gs['term']; ?>" min="1" max="4" required title="Please enter a term between 1 and 4." /></td>
+                    </tr>
+                    <tr>
+                        <th colspan="3">SECTION:</th>
+                        <td colspan="6"><input type="text" id="section" name="section[]" value="<?= $gs['section']; ?>"></td>
+                        <th colspan="2">A.Y.:</th>
+                        <td colspan="12"><input type="text" id="acad_year" name="acad_year[]" value="<?= $gs['acad_year']; ?>"></td>
+                    </tr>
+                <?php endforeach; ?>
                 <tr>
+                    <th>No.</th>
+                    <th colspan="2">Student No.</th>
+                    <th colspan="6">Full Name</th>
+                    <th colspan="2">Course</th>
+                    <?php foreach ($components_weights as $c_w): ?>
+                    <th colspan="2" class="merged">
+                        <div><input type="text" id="weight1" name="weight1[]" placeholder="%" value="<?= $c_w['weight1']; ?>"></div>
+                        <div><input type="text" id="component1" name="component1[]" value="<?= $c_w['component1']; ?>" placeholder="Component 1"></div>
+                    </th>
+                    <th colspan="3" class="merged">
+                        <div><input type="text" id="weight2" name="weight2[]" value="<?= $c_w['weight2']; ?>" placeholder="%"></div>
+                        <div><input type="text" id="component2" name="component2[]" value="<?= $c_w['component2']; ?>" placeholder="Component 2"></div>
+                    </th>
+                    <th colspan="3" class="merged">
+                        <div><input type="text" id="weight3" name="weight3[]" value="<?= $c_w['weight3']; ?>" placeholder="%"></div>
+                        <div><input type="text" id="component3" name="component3[]" value="<?= $c_w['component3']; ?>" placeholder="Component 3"></div>
+                    </th>
+                    <th colspan="3" class="merged">
+                        <div><input type="text" id="weight4" name="weight4[]" value="<?= $c_w['weight4']; ?>" placeholder="%"></div>
+                        <div><input type="text" id="component4" name="component4[]" value="<?= $c_w['component4']; ?>" placeholder="Component 4"></div>
+                    </th>
+                    <?php endforeach; ?>
+                    <th>Grade</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th colspan="2"></th>
+                    <th colspan="6"></th>
+                    <th colspan="2"></th>
+                    <?php foreach ($subcomponents as $subcomp): ?>
+                    <th><input type="text" id="subcomponent1" name="subcomponent1[]" value="<?= $subcomp['subcomponent1']; ?>"></th>
+                    <th><input type="text" id="subcomponent2" name="subcomponent2[]" value="<?= $subcomp['subcomponent2']; ?>"></th>
+                    <th><input type="text" id="subcomponent3" name="subcomponent3[]" value="<?= $subcomp['subcomponent3']; ?>"></th>
+                    <th><input type="text" id="subcomponent4" name="subcomponent4[]" value="<?= $subcomp['subcomponent4']; ?>"></th>
+                    <th><input type="text" id="subcomponent5" name="subcomponent5[]" value="<?= $subcomp['subcomponent5']; ?>"></th>
+                    <th><input type="text" id="subcomponent6" name="subcomponent6[]" value="<?= $subcomp['subcomponent6']; ?>"></th>
+                    <th><input type="text" id="subcomponent7" name="subcomponent7[]" value="<?= $subcomp['subcomponent7']; ?>"></th>
+                    <th><input type="text" id="subcomponent8" name="subcomponent8[]" value="<?= $subcomp['subcomponent8']; ?>"></th>
+                    <th><input type="text" id="subcomponent9" name="subcomponent9[]" value="<?= $subcomp['subcomponent9']; ?>"></th>
+                    <th><input type="text" id="subcomponent10" name="subcomponent10[]" value="<?= $subcomp['subcomponent10']; ?>"></th>
+                    <th><input type="text" id="subcomponent11" name="subcomponent11[]" value="<?= $subcomp['subcomponent11']; ?>"></th>
+                    <th></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+            <tbody>
                 <?php 
                 // Assuming $students and $scores arrays are indexed in such a way that you can access them together.
                 $scoresByStudentNum = [];
                 foreach ($scores as $score) {
                     $scoresByStudentNum[$score['student_id']] = $score;
                 }
-
                 ?>
 
                 <?php foreach ($students as $i => $student): ?>
@@ -1040,56 +1069,53 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                     $studentScore = isset($scoresByStudentNum[$student['student_id']]) 
                         ? $scoresByStudentNum[$student['student_id']] 
                         : null; // Default to null if no score is found
-                        
-                ?>
-                <tr>
-                    <td><input type="text" id="no" value="<?= htmlspecialchars($student['student_id']); ?>"readonly></td>
-                    <td colspan="2"><input type="text" id="student-no" name="student-no" value="<?= htmlspecialchars($student['student_num']); ?>"></td>
-                    <td colspan="6"><input type="text" id="fullname" name="fullname" value="<?= htmlspecialchars($student['fullname']); ?>"></td>
-                    <td colspan="2"><input type="text" id="course" name="course" value="<?= htmlspecialchars($student['course']); ?>"></td>
-                    <!-- Scores -->
-                    <?php if ($studentScore): ?>
-                        <td><input type="text" id="subcompscores1" name="subcompscores1" value="<?= $studentScore['subcompscores1']; ?>"></td>
-                        <td><input type="text" id="subcompscores2" name="subcompscores2" value="<?= $studentScore['subcompscores2']; ?>"></td>
-                        <td><input type="text" id="subcompscores3" name="subcompscores3" value="<?= $studentScore['subcompscores3']; ?>"></td>
-                        <td><input type="text" id="subcompscores4" name="subcompscores4" value="<?= $studentScore['subcompscores4']; ?>"></td>
-                        <td><input type="text" id="subcompscores5" name="subcompscores5" value="<?= $studentScore['subcompscores5']; ?>"></td>
-                        <td><input type="text" id="subcompscores6" name="subcompscores6" value="<?= $studentScore['subcompscores6']; ?>"></td>
-                        <td><input type="text" id="subcompscores7" name="subcompscores7" value="<?= $studentScore['subcompscores7']; ?>"></td>
-                        <td><input type="text" id="subcompscores8" name="subcompscores8" value="<?= $studentScore['subcompscores8']; ?>"></td>
-                        <td><input type="text" id="subcompscores9" name="subcompscores9" value="<?= $studentScore['subcompscores9']; ?>"></td>
-                        <td><input type="text" id="subcompscores10" name="subcompscores10" value="<?= $studentScore['subcompscores10']; ?>"></td>
-                        <td><input type="text" id="subcompscores11" name="subcompscores11" value="<?= $studentScore['subcompscores11']; ?>"></td>
-                        <td>
-                             <!-- Display grades directly in the column -->
-                            <?php if (isset($grades[$studentScore['student_id']])): ?>
-                                <?= htmlspecialchars($grades[$studentScore['student_id']]); ?>
-                            <?php else: ?>
-                                No grade available
-                            <?php endif; ?>
-                        </td>
-                    <?php else: ?>
-                        <!-- If no score exists, display blank fields -->
-                        <td><input type="text" id="subcompscores1" name="subcompscores1" value=""></td>
-                        <td><input type="text" id="subcompscores2" name="subcompscores2" value=""></td>
-                        <td><input type="text" id="subcompscores3" name="subcompscores3" value=""></td>
-                        <td><input type="text" id="subcompscores4" name="subcompscores4" value=""></td>
-                        <td><input type="text" id="subcompscores5" name="subcompscores5" value=""></td>
-                        <td><input type="text" id="subcompscores6" name="subcompscores6" value=""></td>
-                        <td><input type="text" id="subcompscores7" name="subcompscores7" value=""></td>
-                        <td><input type="text" id="subcompscores8" name="subcompscores8" value=""></td>
-                        <td><input type="text" id="subcompscores9" name="subcompscores9" value=""></td>
-                        <td><input type="text" id="subcompscores10" name="subcompscores10" value=""></td>
-                        <td><input type="text" id="subcompscores11" name="subcompscores11" value=""></td>
-                        <td>
-                        </td>
-                    <?php endif; ?>
-                </tr>
+                    ?>
+                    <tr id="inputs-from-form">
+                        <td id="no"><?= htmlspecialchars($student['student_id']); ?></td>
+                        <td colspan="2" id="student-no" name="student-no"><?= htmlspecialchars($student['student_num']); ?></td>
+                        <td colspan="6" id="fullname" name="fullname"><?= htmlspecialchars($student['fullname']); ?></td>
+                        <td colspan="2" id="course" name="course"><?= htmlspecialchars($student['course']); ?></td>
+                        <!-- Scores -->
+                        <?php if ($studentScore): ?>
+                            <td id="subcompscores1" name="subcompscores1"><?= $studentScore['subcompscores1']; ?></td>
+                            <td id="subcompscores2" name="subcompscores2"><?= $studentScore['subcompscores2']; ?></td>
+                            <td id="subcompscores3" name="subcompscores3"><?= $studentScore['subcompscores3']; ?></td>
+                            <td id="subcompscores4" name="subcompscores4"><?= $studentScore['subcompscores4']; ?></td>
+                            <td id="subcompscores5" name="subcompscores5"><?= $studentScore['subcompscores5']; ?></td>
+                            <td id="subcompscores6" name="subcompscores6"><?= $studentScore['subcompscores6']; ?></td>
+                            <td id="subcompscores7" name="subcompscores7"><?= $studentScore['subcompscores7']; ?></td>
+                            <td id="subcompscores8" name="subcompscores8"><?= $studentScore['subcompscores8']; ?></td>
+                            <td id="subcompscores9" name="subcompscores9"><?= $studentScore['subcompscores9']; ?></td>
+                            <td id="subcompscores10" name="subcompscores10"><?= $studentScore['subcompscores10']; ?></td>
+                            <td id="subcompscores11" name="subcompscores11"><?= $studentScore['subcompscores11']; ?></td>
+                            <td>
+                                <!-- Display grades directly in the column -->
+                                <?php if (isset($grades[$studentScore['student_id']])): ?>
+                                    <?= htmlspecialchars($grades[$studentScore['student_id']]); ?>
+                                <?php else: ?>
+                                    No grade available
+                                <?php endif; ?>
+                            </td>
+                        <?php else: ?>
+                            <!-- If no score exists, display blank fields -->
+                            <td><?= htmlspecialchars($studentScore['subcompscores1']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores2']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores3']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores4']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores5']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores6']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores7']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores8']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores9']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores10']); ?></td>
+                            <td><?= htmlspecialchars($studentScore['subcompscores11']); ?></td>
+                            <td></td>
+                        <?php endif; ?>
+                    </tr>
                 <?php endforeach; ?>
-            </tr>
-                </tbody>
-            </table>
-        </form>
+            </tbody>
+        </table>
+    </div>
     </div>
 
     <script>
@@ -1196,7 +1222,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
                         }
                     });
                     } else {
-                        alert('Invalid username or password.');
+                        alert('Invalid username or password. Please check your credentials and try again.');
                     }
                 })
                 .catch(error => {
@@ -1312,6 +1338,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
         });
     });
     </script>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         // Delete Row
@@ -1358,6 +1385,7 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
     });
 });
     </script>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         const popupFormEditRow = document.getElementById('popupFormEditRow');
@@ -1416,5 +1444,6 @@ if (!isset($pdo) || !$pdo instanceof PDO) {
         });
     });
     </script>
+    
 </body>
 </html>
